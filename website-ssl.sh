@@ -68,7 +68,7 @@ function init(){
 
     # 检查openssl.cnf文件是否存在，不存在则下载一个过来
     if [[ ! -f $openssl_cnf ]];then
-        cp libs/openssl.cnf /etc/ssl/
+        cp /root/libs/openssl.cnf /etc/ssl/
     fi
 }
 
@@ -95,7 +95,7 @@ function create_pem(){
     fi
 
     # 申请证书crt文件
-    python libs/acme_tiny.py --account-key account.key --csr domain.csr --acme-dir $challenges_dir > signed.crt
+    python3 /root/libs/acme_tiny.py --account-key account.key --csr domain.csr --acme-dir $challenges_dir > signed.crt
     # 下载Let’s Encrypt 的中间证书
     curl -so lets-signed.pem https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem
     # 俩证书合并，得到最终pem文件
